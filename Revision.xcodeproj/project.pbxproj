@@ -397,6 +397,7 @@
 				AA1F51291CD8556C00739A87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA80C52E1CBFDAEF000ABB36 /* Build configuration list for PBXProject "Revision" */ = {
 			isa = XCConfigurationList;
