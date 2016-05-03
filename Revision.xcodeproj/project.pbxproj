@@ -7,24 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA1F51241CD8556C00739A87 /* RevisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F51231CD8556C00739A87 /* RevisionTests.swift */; };
+		AA1F512D1CD858DB00739A87 /* Revision.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA1F512B1CD858DB00739A87 /* Revision.xcdatamodeld */; };
 		AA66FE681CC3850A007E9F14 /* AddQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA66FE671CC3850A007E9F14 /* AddQuestionViewController.swift */; };
 		AA66FE6A1CC3A1D6007E9F14 /* RevisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA66FE691CC3A1D6007E9F14 /* RevisionViewController.swift */; };
 		AA80C5371CBFDAF0000ABB36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA80C5361CBFDAF0000ABB36 /* AppDelegate.swift */; };
 		AA80C53C1CBFDAF0000ABB36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA80C53A1CBFDAF0000ABB36 /* Main.storyboard */; };
-		AA80C53F1CBFDAF0000ABB36 /* Revision.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA80C53D1CBFDAF0000ABB36 /* Revision.xcdatamodeld */; };
 		AA80C5411CBFDAF0000ABB36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA80C5401CBFDAF0000ABB36 /* Assets.xcassets */; };
 		AA80C5441CBFDAF0000ABB36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA80C5421CBFDAF0000ABB36 /* LaunchScreen.storyboard */; };
 		AA80C54C1CBFDD9B000ABB36 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA80C54B1CBFDD9B000ABB36 /* TableViewController.swift */; };
 		AAA598B61CC1EA590004516B /* QuestionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA598B51CC1EA590004516B /* QuestionTableViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AA1F51261CD8556C00739A87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA80C52B1CBFDAEF000ABB36 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA80C5321CBFDAEF000ABB36;
+			remoteInfo = Revision;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		AA1F51211CD8556C00739A87 /* RevisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RevisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA1F51231CD8556C00739A87 /* RevisionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevisionTests.swift; sourceTree = "<group>"; };
+		AA1F51251CD8556C00739A87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA1F512C1CD858DB00739A87 /* Revision.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Revision.xcdatamodel; sourceTree = "<group>"; };
 		AA66FE671CC3850A007E9F14 /* AddQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuestionViewController.swift; sourceTree = "<group>"; };
 		AA66FE691CC3A1D6007E9F14 /* RevisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevisionViewController.swift; sourceTree = "<group>"; };
 		AA80C5331CBFDAF0000ABB36 /* Revision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Revision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA80C5361CBFDAF0000ABB36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA80C53B1CBFDAF0000ABB36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AA80C53E1CBFDAF0000ABB36 /* Revision.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Revision.xcdatamodel; sourceTree = "<group>"; };
 		AA80C5401CBFDAF0000ABB36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA80C5431CBFDAF0000ABB36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA80C5451CBFDAF0000ABB36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,6 +47,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AA1F511E1CD8556C00739A87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA80C5301CBFDAEF000ABB36 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -43,10 +64,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA1F51221CD8556C00739A87 /* RevisionTests */ = {
+			isa = PBXGroup;
+			children = (
+				AA1F51231CD8556C00739A87 /* RevisionTests.swift */,
+				AA1F51251CD8556C00739A87 /* Info.plist */,
+			);
+			path = RevisionTests;
+			sourceTree = "<group>";
+		};
 		AA80C52A1CBFDAEF000ABB36 = {
 			isa = PBXGroup;
 			children = (
 				AA80C5351CBFDAF0000ABB36 /* Revision */,
+				AA1F51221CD8556C00739A87 /* RevisionTests */,
 				AA80C5341CBFDAF0000ABB36 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				AA80C5331CBFDAF0000ABB36 /* Revision.app */,
+				AA1F51211CD8556C00739A87 /* RevisionTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,7 +103,7 @@
 				AA80C5401CBFDAF0000ABB36 /* Assets.xcassets */,
 				AA80C5421CBFDAF0000ABB36 /* LaunchScreen.storyboard */,
 				AA80C5451CBFDAF0000ABB36 /* Info.plist */,
-				AA80C53D1CBFDAF0000ABB36 /* Revision.xcdatamodeld */,
+				AA1F512B1CD858DB00739A87 /* Revision.xcdatamodeld */,
 			);
 			path = Revision;
 			sourceTree = "<group>";
@@ -79,6 +111,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AA1F51201CD8556C00739A87 /* RevisionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA1F512A1CD8556C00739A87 /* Build configuration list for PBXNativeTarget "RevisionTests" */;
+			buildPhases = (
+				AA1F511D1CD8556C00739A87 /* Sources */,
+				AA1F511E1CD8556C00739A87 /* Frameworks */,
+				AA1F511F1CD8556C00739A87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA1F51271CD8556C00739A87 /* PBXTargetDependency */,
+			);
+			name = RevisionTests;
+			productName = RevisionTests;
+			productReference = AA1F51211CD8556C00739A87 /* RevisionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		AA80C5321CBFDAEF000ABB36 /* Revision */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA80C5481CBFDAF0000ABB36 /* Build configuration list for PBXNativeTarget "Revision" */;
@@ -106,6 +156,11 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = muhdmirzamz;
 				TargetAttributes = {
+					AA1F51201CD8556C00739A87 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 5Y8ZVY4N62;
+						TestTargetID = AA80C5321CBFDAEF000ABB36;
+					};
 					AA80C5321CBFDAEF000ABB36 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 5Y8ZVY4N62;
@@ -126,11 +181,19 @@
 			projectRoot = "";
 			targets = (
 				AA80C5321CBFDAEF000ABB36 /* Revision */,
+				AA1F51201CD8556C00739A87 /* RevisionTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AA1F511F1CD8556C00739A87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA80C5311CBFDAEF000ABB36 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -144,20 +207,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AA1F511D1CD8556C00739A87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1F51241CD8556C00739A87 /* RevisionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA80C52F1CBFDAEF000ABB36 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA80C53F1CBFDAF0000ABB36 /* Revision.xcdatamodeld in Sources */,
 				AA66FE6A1CC3A1D6007E9F14 /* RevisionViewController.swift in Sources */,
 				AAA598B61CC1EA590004516B /* QuestionTableViewController.swift in Sources */,
 				AA66FE681CC3850A007E9F14 /* AddQuestionViewController.swift in Sources */,
 				AA80C54C1CBFDD9B000ABB36 /* TableViewController.swift in Sources */,
+				AA1F512D1CD858DB00739A87 /* Revision.xcdatamodeld in Sources */,
 				AA80C5371CBFDAF0000ABB36 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA1F51271CD8556C00739A87 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA80C5321CBFDAEF000ABB36 /* Revision */;
+			targetProxy = AA1F51261CD8556C00739A87 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AA80C53A1CBFDAF0000ABB36 /* Main.storyboard */ = {
@@ -179,6 +258,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AA1F51281CD8556C00739A87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RevisionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = muhdmirzamz.RevisionTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Revision.app/Revision";
+			};
+			name = Debug;
+		};
+		AA1F51291CD8556C00739A87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RevisionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = muhdmirzamz.RevisionTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Revision.app/Revision";
+			};
+			name = Release;
+		};
 		AA80C5461CBFDAF0000ABB36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -287,6 +390,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AA1F512A1CD8556C00739A87 /* Build configuration list for PBXNativeTarget "RevisionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA1F51281CD8556C00739A87 /* Debug */,
+				AA1F51291CD8556C00739A87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		AA80C52E1CBFDAEF000ABB36 /* Build configuration list for PBXProject "Revision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -308,12 +419,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		AA80C53D1CBFDAF0000ABB36 /* Revision.xcdatamodeld */ = {
+		AA1F512B1CD858DB00739A87 /* Revision.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				AA80C53E1CBFDAF0000ABB36 /* Revision.xcdatamodel */,
+				AA1F512C1CD858DB00739A87 /* Revision.xcdatamodel */,
 			);
-			currentVersion = AA80C53E1CBFDAF0000ABB36 /* Revision.xcdatamodel */;
+			currentVersion = AA1F512C1CD858DB00739A87 /* Revision.xcdatamodel */;
 			path = Revision.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
