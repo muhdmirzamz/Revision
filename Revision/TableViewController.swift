@@ -10,10 +10,12 @@ import UIKit
 import CoreData
 
 class TableViewController: UITableViewController {
-
+	
 	let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 	var fetchResController: NSFetchedResultsController?
 	var subjectArr: NSMutableArray?
+	
+	@IBOutlet var addButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,25 +80,6 @@ class TableViewController: UITableViewController {
 		self.presentViewController(alertController, animated: true, completion: nil)
 	}
 
-	@IBAction func deleteAll(sender: UIBarButtonItem) {
-		for subject in self.fetchObjects()! {
-			self.subjectArr?.removeObject(subject)
-		
-			let subject = subject as? NSManagedObject
-			self.context.deleteObject(subject!)
-		}
-		
-		do {
-			try self.context.save()
-			
-			print("Amount after delete: \(self.subjectArr!.count)")
-			
-			self.tableView.reloadData()
-		} catch {
-			print("Error deleting\n")
-		}
-	}
-
 	func fetchObjects() -> NSMutableArray? {
 		var subjectArr: NSMutableArray?
 	
@@ -122,6 +105,17 @@ class TableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+	override func setEditing(editing: Bool, animated: Bool) {
+		super.setEditing(editing, animated: animated)
+		
+		if editing {
+			self.addButton.enabled = false
+		} else {
+			self.addButton.enabled = true
+		}
+	}
+	
 
     // MARK: - Table view data source
 
@@ -152,6 +146,8 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+		self.navigationItem.rightBarButtonItem?.enabled = false
+	
         if editingStyle == .Delete {
 			if let object = self.subjectArr?[indexPath.row] as? NSManagedObject {
 				let subjectName = object.valueForKey("name") as? String
@@ -166,8 +162,6 @@ class TableViewController: UITableViewController {
 				} catch {
 					print("Unable to save!\n")
 				}
-				
-				
 				
 				var subjectArr: NSMutableArray?
 				

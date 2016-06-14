@@ -16,6 +16,9 @@ class QuestionTableViewController: UITableViewController, dataReload {
 	var context: NSManagedObjectContext?
 	var fetchResController: NSFetchedResultsController?
 	
+	@IBOutlet var addBtn: UIBarButtonItem!
+	@IBOutlet var revisionBtn: UIBarButtonItem!
+
 	var editBtn: UIBarButtonItem!
 
     override func viewDidLoad() {
@@ -24,17 +27,21 @@ class QuestionTableViewController: UITableViewController, dataReload {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-		
 		self.editBtn = self.editButtonItem()
 		self.navigationItem.rightBarButtonItems?.append(self.editBtn)
 		
 		self.questionArr = self.fetchObjects(WithContext: self.context!, andSubject: self.subjectName!)
+		
+		if self.questionArr?.count == 0 {
+			self.revisionBtn.enabled = false
+		} else {
+			self.revisionBtn.enabled = true
+		}
     }
 
 	func fetchObjects(WithContext context: NSManagedObjectContext, andSubject subject: String) -> NSMutableArray? {
-		var subjectArr: NSMutableArray?
-		
+		var tmpQuestionArr: NSMutableArray?
+	
 		let entity = NSEntityDescription.entityForName("Question", inManagedObjectContext: context)
 		let sortDescriptors = NSSortDescriptor.init(key: "question", ascending: true)
 		
@@ -45,13 +52,14 @@ class QuestionTableViewController: UITableViewController, dataReload {
 		self.fetchResController = NSFetchedResultsController.init(fetchRequest: fetchReq, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
 		do {
 			try self.fetchResController?.performFetch()
-			
-			subjectArr = NSMutableArray.init(array: self.fetchResController!.fetchedObjects!)
-			
-			for object in subjectArr! {
+		
+			tmpQuestionArr = NSMutableArray()
+		
+			for object in self.fetchResController!.fetchedObjects! {
 				let subjectName = object.valueForKey("subjectName") as? String
-				if subjectName != self.subjectName {
-					subjectArr?.removeObject(object)
+				
+				if subjectName! == subject {
+					tmpQuestionArr!.addObject(object)
 				}
 			}
 			
@@ -59,13 +67,36 @@ class QuestionTableViewController: UITableViewController, dataReload {
 			print("Unable to fetch data!\n")
 		}
 		
-		return subjectArr
+		return tmpQuestionArr
 	}
 	
 	func reloadTableData(withContext context: NSManagedObjectContext, andSubjectName subject: String) {
 		self.questionArr = self.fetchObjects(WithContext: context, andSubject: subject)
-	
+		
+		if self.questionArr?.count == 0 {
+			self.revisionBtn.enabled = false
+		} else {
+			self.revisionBtn.enabled = true
+		}
+		
 		self.tableView.reloadData()
+	}
+	
+	override func setEditing(editing: Bool, animated: Bool) {
+		super.setEditing(editing, animated: animated)
+		
+		if editing {
+			self.addBtn.enabled = false
+			self.revisionBtn.enabled = false
+		} else {
+			self.addBtn.enabled = true
+			
+			if self.questionArr?.count == 0 {
+				self.revisionBtn.enabled = false
+			} else {
+				self.revisionBtn.enabled = true
+			}
+		}
 	}
 	
     override func didReceiveMemoryWarning() {

@@ -14,11 +14,14 @@ import CoreData
 class RevisionTests: XCTestCase {
 	
 	var context: NSManagedObjectContext?
+	var fetchResController: NSFetchedResultsController?
+	var subjectArr: NSMutableArray?
 	
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
 		
+		// setup core data
 		self.context = self.createInMemoryManagedObjectContext()
     }
 
@@ -26,76 +29,12 @@ class RevisionTests: XCTestCase {
 		let tvc = TableViewController()
 		let navController = UINavigationController.init(rootViewController: tvc)
 		UIApplication.sharedApplication().keyWindow?.rootViewController = navController
-		
-		let alertController = UIAlertController.init(title: "Enter subject name", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-		let okAction = UIAlertAction.init(title: "OK", style: .Default, handler: nil)
-		let cancelAction = UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.Default, handler:nil)
-		alertController.addTextFieldWithConfigurationHandler(nil)
-		alertController.addAction(cancelAction)
-		alertController.addAction(okAction)
-		
-		tvc.presentViewController(alertController, animated: true, completion: nil)
-		
-		XCTAssertTrue(tvc.presentedViewController == alertController, "Alert is presented\n")
-	}
-	
-	func DISABLED_testAddSubject() {
-		let tvc = TableViewController()
-		let navController = UINavigationController.init(rootViewController: tvc)
-		UIApplication.sharedApplication().keyWindow?.rootViewController = navController
-		
-		let alertController = UIAlertController.init(title: "Enter subject name", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-		let okAction = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) in
-			let subjectName = alertController.textFields![0].text
-			
-			let currentSubjectArr = tvc.fetchObjects()
-			
-			var isDuplicate = false
-			
-			for object in currentSubjectArr! {
-				if object.valueForKey!("name") as? String == subjectName {
-					let alert = UIAlertController.init(title: "Error", message: "Subject already exists", preferredStyle: .Alert)
-					let ok = UIAlertAction.init(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
-						alertController.textFields![0].text = ""
-					})
-					
-					isDuplicate = true
-					
-					alert.addAction(ok)
-					tvc.presentViewController(alert, animated: true, completion: nil)
-					
-					break
-				}
-			}
-			
-			if !isDuplicate {
-				let subjectEntity = NSEntityDescription.entityForName("Subject", inManagedObjectContext: self.context!)
-				let subject = NSManagedObject.init(entity: subjectEntity!, insertIntoManagedObjectContext: self.context)
-				subject.setValue(subjectName, forKey: "name")
-				do {
-					try self.context!.save()
-					
-					tvc.subjectArr?.addObject(subject)
-					
-					print("Amount after add: \(tvc.subjectArr!.count)")
-					
-					tvc.tableView.reloadData()
-				} catch {
-					print("Unable to save!\n")
-				}
-			}
-		}
-		let cancelHandler = {(action: UIAlertAction!) -> Void in
-			tvc.dismissViewControllerAnimated(true, completion: nil)
-		}
-		let cancelAction = UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.Default, handler: cancelHandler)
-		alertController.addTextFieldWithConfigurationHandler(nil)
-		alertController.addAction(cancelAction)
-		alertController.addAction(okAction)
-		
-		tvc.presentViewController(alertController, animated: true, completion: nil)
-		
-		XCTAssertTrue(tvc.presentedViewController == alertController, "Alert is presented\n")
+
+		let barButton = UIBarButtonItem.init(title: "", style: .Plain, target: self, action: nil)
+		tvc.addSubject(barButton)
+
+		XCTAssertNotNil(tvc.presentedViewController, "There should be an alert here!\n")
+		XCTAssertTrue(tvc.presentedViewController!.isKindOfClass(UIAlertController), "Presented view controller should be a UIAlertController")
 	}
 	
     override func tearDown() {
@@ -104,6 +43,58 @@ class RevisionTests: XCTestCase {
 		
 		self.context = nil
     }
+
+	func fetchObjects() -> NSMutableArray? {
+		var subjectArr: NSMutableArray?
+		
+		let entity = NSEntityDescription.entityForName("Subject", inManagedObjectContext: self.context!)
+		let sortDescriptors = NSSortDescriptor.init(key: "name", ascending: true)
+		
+		let fetchReq = NSFetchRequest()
+		fetchReq.entity = entity
+		fetchReq.sortDescriptors = [sortDescriptors]
+		
+		let fetchResController = NSFetchedResultsController.init(fetchRequest: fetchReq, managedObjectContext: self.context!, sectionNameKeyPath: nil, cacheName: nil)
+		do {
+			try fetchResController.performFetch()
+			
+			subjectArr = NSMutableArray.init(array: fetchResController.fetchedObjects!)
+		} catch {
+			print("Unable to fetch data!\n")
+		}
+		
+		return subjectArr
+	}
+	
+	func fetchObjects(WithContext context: NSManagedObjectContext, andSubject subject: String) -> NSMutableArray? {
+		var subjectArr: NSMutableArray?
+		
+		let entity = NSEntityDescription.entityForName("Question", inManagedObjectContext: context)
+		let sortDescriptors = NSSortDescriptor.init(key: "question", ascending: true)
+		
+		let fetchReq = NSFetchRequest()
+		fetchReq.entity = entity
+		fetchReq.sortDescriptors = [sortDescriptors]
+		
+		let fetchResController = NSFetchedResultsController.init(fetchRequest: fetchReq, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+		do {
+			try fetchResController.performFetch()
+			
+			subjectArr = NSMutableArray.init(array: fetchResController.fetchedObjects!)
+			
+			for object in subjectArr! {
+				let subjectName = object.valueForKey("subjectName") as? String
+				if subjectName != "English" {
+					subjectArr?.removeObject(object)
+				}
+			}
+			
+		} catch {
+			print("Unable to fetch data!\n")
+		}
+		
+		return subjectArr
+	}
 
 	func createInMemoryManagedObjectContext() -> NSManagedObjectContext? {
 		let objectModel = NSManagedObjectModel.mergedModelFromBundles([NSBundle.mainBundle()])

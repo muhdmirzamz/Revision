@@ -13,7 +13,7 @@ protocol dataReload {
 	func reloadTableData(withContext context: NSManagedObjectContext, andSubjectName subject: String)
 }
 
-class AddQuestionViewController: UIViewController {
+class AddQuestionViewController: UIViewController, UITextFieldDelegate {
 	
 	var subjectName: String?
 	var context: NSManagedObjectContext?
@@ -23,17 +23,26 @@ class AddQuestionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		
         // Do any additional setup after loading the view.
+		
+		
+		self.textfield.delegate = self
+		self.textfield.returnKeyType = .Done
+		
+		self.textfield.becomeFirstResponder()
     }
 
 	@IBAction func dismissViewController() {
 		self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
 	}
 	
-	@IBAction func addQuestion() {
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		let alertController = UIAlertController.init(title: "Hold on", message: "Are you sure?", preferredStyle: .Alert)
-		let yesAction = UIAlertAction.init(title: "YES", style: .Default, handler: { (action: UIAlertAction!) in
+		let noAction = UIAlertAction.init(title: "No", style: .Default) { (action: UIAlertAction!) in
+			self.dismissViewController()
+		}
+		let yesAction = UIAlertAction.init(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
 			let question = self.textfield.text
 			let object = NSEntityDescription.insertNewObjectForEntityForName("Question", inManagedObjectContext: self.context!)
 			object.setValue(self.subjectName!, forKey: "subjectName")
@@ -41,19 +50,19 @@ class AddQuestionViewController: UIViewController {
 			do {
 				try self.context?.save()
 				
-				self.dismissViewController()
 				self.delegate?.reloadTableData(withContext: self.context!, andSubjectName: self.subjectName!)
+				
+				self.dismissViewController()
 			} catch {
 				print("Unable to save question!")
 			}
 		})
-		let noAction = UIAlertAction.init(title: "NO", style: .Default) { (action: UIAlertAction!) in
-			self.dismissViewController()
-		}
-		alertController.addAction(yesAction)
 		alertController.addAction(noAction)
+		alertController.addAction(yesAction)
 		
 		self.presentViewController(alertController, animated: true, completion: nil)
+		
+		return true
 	}
 
     override func didReceiveMemoryWarning() {

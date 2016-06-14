@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D37-SV-prq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D37-SV-prq">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Subjects-->
         <scene sceneID="Oeh-zk-vv9">
             <objects>
                 <tableViewController id="4Ad-0R-L6S" customClass="TableViewController" customModule="Revision" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,26 +33,22 @@
                             <outlet property="delegate" destination="4Ad-0R-L6S" id="ex7-RS-0dq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="rIe-yR-FEW">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="xP4-6W-hJb">
-                                <connections>
-                                    <action selector="addSubject:" destination="4Ad-0R-L6S" id="3QI-c7-2Pn"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Delete all" id="g0O-kj-ioW">
-                                <connections>
-                                    <action selector="deleteAll:" destination="4Ad-0R-L6S" id="wkW-xf-UgX"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                    <navigationItem key="navigationItem" title="Subjects" id="rIe-yR-FEW">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xP4-6W-hJb">
+                            <connections>
+                                <action selector="addSubject:" destination="4Ad-0R-L6S" id="3QI-c7-2Pn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="xP4-6W-hJb" id="2wU-g2-tKU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="85l-xu-NdZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1586" y="16"/>
         </scene>
-        <!--Question Table View Controller-->
+        <!--Questions-->
         <scene sceneID="mZs-nG-hZY">
             <objects>
                 <tableViewController id="eeR-2K-BZS" customClass="QuestionTableViewController" customModule="Revision" customModuleProvider="target" sceneMemberID="viewController">
@@ -74,7 +71,7 @@
                             <outlet property="delegate" destination="eeR-2K-BZS" id="BKf-pM-HU1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ycl-cO-h8J">
+                    <navigationItem key="navigationItem" title="Questions" id="ycl-cO-h8J">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="ALz-Vt-8uL">
                                 <connections>
@@ -88,6 +85,10 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addBtn" destination="ALz-Vt-8uL" id="BcM-Yd-C0J"/>
+                        <outlet property="revisionBtn" destination="5Nj-T1-GbT" id="E9z-2q-VJa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A3e-2I-Xzn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -109,11 +110,10 @@
                                 <rect key="frame" x="136" y="452" width="328" height="30"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
-                                    <action selector="addQuestion" destination="INu-WT-CCt" eventType="touchUpInside" id="fph-Xt-fD3"/>
                                     <action selector="generateNextQuestion" destination="YmU-Qf-L0M" eventType="touchUpInside" id="CxI-to-npy"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ax-Rq-R1x">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ax-Rq-R1x">
                                 <rect key="frame" x="103" y="297" width="400" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -122,8 +122,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="5Ax-Rq-R1x" secondAttribute="trailing" constant="77" id="7vF-Do-nuk"/>
                             <constraint firstItem="Zjg-Kj-IxO" firstAttribute="top" secondItem="5Ax-Rq-R1x" secondAttribute="bottom" constant="134" id="8Ke-0w-kEV"/>
                             <constraint firstItem="Zjg-Kj-IxO" firstAttribute="centerX" secondItem="8GK-mL-pWC" secondAttribute="centerX" id="ApQ-uM-nwR"/>
+                            <constraint firstItem="5Ax-Rq-R1x" firstAttribute="leading" secondItem="8GK-mL-pWC" secondAttribute="leadingMargin" constant="83" id="F8D-Wm-MON"/>
                             <constraint firstItem="5Ax-Rq-R1x" firstAttribute="centerX" secondItem="8GK-mL-pWC" secondAttribute="centerX" id="b39-wu-c9g"/>
                         </constraints>
                     </view>
@@ -159,18 +161,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NkF-Nn-Xeo">
-                                <rect key="frame" x="144" y="427" width="328" height="30"/>
-                                <state key="normal" title="Add Question"/>
-                                <connections>
-                                    <action selector="addQuestion" destination="Vfc-bv-Cp4" eventType="touchUpInside" id="HJb-JQ-siN"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NkF-Nn-Xeo" firstAttribute="top" secondItem="oCp-h2-qKl" secondAttribute="bottom" constant="138" id="KVa-cT-x8z"/>
-                            <constraint firstItem="NkF-Nn-Xeo" firstAttribute="centerX" secondItem="b9n-GE-mpp" secondAttribute="centerX" id="rdQ-ln-4zN"/>
                             <constraint firstItem="oCp-h2-qKl" firstAttribute="centerX" secondItem="b9n-GE-mpp" secondAttribute="centerX" id="zd1-8t-v5t"/>
                         </constraints>
                     </view>
@@ -242,19 +235,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBn-Zi-jAk">
-                                <rect key="frame" x="144" y="427" width="328" height="30"/>
-                                <state key="normal" title="Add Question"/>
-                                <connections>
-                                    <action selector="addQuestion" destination="INu-WT-CCt" eventType="touchUpInside" id="2BN-2g-SCs"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZNo-w8-LLY" firstAttribute="centerX" secondItem="kpA-oo-FzO" secondAttribute="centerX" id="Jue-Zm-Ono"/>
-                            <constraint firstItem="GBn-Zi-jAk" firstAttribute="centerX" secondItem="kpA-oo-FzO" secondAttribute="centerX" id="dEV-94-0R1"/>
-                            <constraint firstItem="GBn-Zi-jAk" firstAttribute="top" secondItem="ZNo-w8-LLY" secondAttribute="bottom" constant="138" id="vUn-ne-8Sh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IKh-P7-SJA">
